@@ -18,7 +18,7 @@ function Homepage() {
                     <div className="typewriter-text">
                         <Typewriter
                             options={{
-                                strings: ["Computer Science @ University of Toronto", "Software Developer @ Alida", "Partnerships Director @ GDG", "Event Coordinator @ WiCSM"],
+                                strings: ["CS @ University of Toronto", "Software Developer @ Alida", "Partnerships Director @ GDG", "Event Coordinator @ WiCSM"],
                                 autoStart: true,
                                 loop: true,
                                 delay: 75,
