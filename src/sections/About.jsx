@@ -1,29 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function About() {
-    const slides = document.querySelectorAll(".slide");
-    const nextBtn = document.querySelector(".arrow.right");
-    const prevBtn = document.querySelector(".arrow.left");
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const [activeTab, setActiveTab] = useState('skills');
+    
+    // Add your images/slides here
+    const slides = [
+        "Slide 1 content",
+        "Slide 2 content",
+        "Slide 3 content"
+    ];
 
-    let index = 0;
-
-    function showSlide(i) {
-        slides.forEach(slide => slide.classList.remove("active"));
-        slides[i].classList.add("active");
-      }
+    const tabContent = {
+        skills: "Your skills content here",
+        experience: "Your experience content here",
+        volunteer: "Your volunteer work here"
+    };
 
     function nextSlide() {
-        index = (index + 1) % slides.length;
-        showSlide();
+        setCurrentSlide((currentSlide + 1) % slides.length);
     }
 
     function prevSlide() {
-        if (index == 0) {
-            index = slides.length;
-        }
-
-        index = (index - 1) % slides.length;
-        showSlide();
+        setCurrentSlide((currentSlide - 1 + slides.length) % slides.length);
     }
 
 
@@ -37,34 +36,34 @@ function About() {
                         <p>I’m currently a computer science student at the University of Toronto, pursuing a software engineering specialist with a minor in statistics! I’m passionate about full-stack development and am always interested in learning new technologies, languages, and frameworks. I hope to create a tangible impact on the world with the projects I create. </p>
                     </div>
                     <div className="moreAbout">
-                        <div className="skills">
+                        <div className={`skills ${activeTab === 'skills' ? 'active' : ''}`} onClick={() => setActiveTab('skills')}>
                             <p>skills</p>
                         </div>
                         <p> | </p>
-                        <div className="experience">
+                        <div className={`experience ${activeTab === 'experience' ? 'active' : ''}`} onClick={() => setActiveTab('experience')}>
                             <p>experience</p>
                         </div>
                         <p> | </p>
-                        <div className="volunteer">
+                        <div className={`volunteer ${activeTab === 'volunteer' ? 'active' : ''}`} onClick={() => setActiveTab('volunteer')}>
                             <p>volunteer</p>
                         </div>
+                    </div>
+                    <div className="tabContent">
+                        {tabContent[activeTab]}
                     </div>
                 </div>
 
                 <div className="rightAbout">
-                    <div class="carousel">
-                        <button onClick={nextSlide} className="nextBtn">&#10095;</button>
+                    <div className="carousel">
+                        <button onClick={prevSlide} className="arrow left">&#10094;</button>
 
-                        <div class="carousel-window">
-                            <div class="carousel-track">
-                            <div class="slide">Slide 1 content</div>
-                            <div class="slide">Slide 2 content</div>
-                            <div class="slide">Slide 3 content</div>
+                        <div className="carousel-window">
+                            <div className="carousel-content">
+                                {slides[currentSlide]}
                             </div>
                         </div>
 
-                        <button onClick={prevSlide} className="prevBtn">&#10094;</button>
-
+                        <button onClick={nextSlide} className="arrow right">&#10095;</button>
                     </div>
                 </div>
             </div>
